@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IMovieData } from '../interface/movies.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class MoviesService {
   ) { }
 
   fetchData () {
-    return this.httpClient.get(this.api);
+    return this.httpClient.get<IMovieData[]>(this.api);
   }
 
 }
