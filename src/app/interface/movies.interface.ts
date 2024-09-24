@@ -1,3 +1,14 @@
+export interface AppState {
+    movies: IMoviesState
+}
+
+export interface IMoviesState {
+    filterBy: {category:string, query:string},
+    loading: boolean;
+    error: string;
+    movieList: IMovieData[],
+}
+
 export interface IMovieData {
     title: string;
     thumbnail: IThumbnail;

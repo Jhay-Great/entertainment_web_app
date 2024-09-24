@@ -1,14 +1,9 @@
 import { createReducer, on } from "@ngrx/store";
-import { IMovieData } from "../interface/movies.interface";
+import { IMoviesState } from "../interface/movies.interface";
 import { loadMovies, loadMoviesFailed, loadMoviesIsSuccessful } from "./movie.action";
 
 // state
-export interface IMoviesState {
-    filterBy: {category:string, query:string},
-    loading: boolean;
-    error: string;
-    movieList: IMovieData[],
-}
+
 // initial data
 const initialValue:IMoviesState = {
     filterBy: {category: '', query: ''},
