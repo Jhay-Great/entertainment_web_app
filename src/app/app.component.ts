@@ -7,17 +7,19 @@ import { AppState, IMovieData, IMoviesState } from './interface/movies.interface
 import { selectMovies } from './state/movie.selector';
 import { loadMovies } from './state/movie.action';
 import { Observable } from 'rxjs';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
+import { MoviesComponent } from './components/movies/movies.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SearchComponent, NavComponent],
+  imports: [RouterOutlet, SearchComponent, NavComponent, MoviesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   title = 'entertainment_web_app';
-  data$!:Observable<IMovieData[]>
+  // data$!:Observable<IMovieData[]>
 
   constructor (
     private store: Store<AppState>,
@@ -27,7 +29,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(loadMovies())
     // console.log(this.store.select(selectMovies))
 
-    this.data$ = this.store.select(selectMovies);
+    // this.data$ = this.store.select(selectMovies);
 
   }
 }
