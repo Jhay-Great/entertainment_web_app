@@ -14,6 +14,7 @@ export const movieReducer = createReducer(
     initialValue,
     on(loadMovies, (state) => ({...state, loading:true})),
     on(loadMoviesIsSuccessful, (state, { movies }) => {
+        console.log('triggered...')
         return {
             ...state,
             movieList: movies,

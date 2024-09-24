@@ -1,0 +1,6 @@
+
+@for (movie of movies$ | async; track $index) {
+    <p>
+        {{ movie.category }}
+    </p>
+}
