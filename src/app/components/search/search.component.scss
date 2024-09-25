@@ -4,9 +4,10 @@
 input {
     width: 100%;
     background: transparent;
-    border: none;
+    border: 1px solid transparent;
     padding: .5rem;
     color: var.$color-white;
+    outline: none;
 
     &::placeholder {
         font-size: var.$font-size-xs;
