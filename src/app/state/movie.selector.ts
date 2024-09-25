@@ -45,4 +45,5 @@ export const selectMovieItems = (category: string | null) => {
 }
 
 
+// return lowercase strings
 const toLowerCase = (string:string) => string.toLowerCase();
