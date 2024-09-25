@@ -19,6 +19,7 @@ export interface IMovieData {
     title: string;
     thumbnail: IThumbnail;
     year: number;
+    rating: string;
     category: string;
     isBookmarked: boolean;
     isTrending: boolean;

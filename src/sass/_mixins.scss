@@ -10,6 +10,13 @@
 
 @mixin position ($position) {
     position: $position;
+    
+}
+
+// overflow
+@mixin overflow ($overflow) {
+    overflow-x: $overflow;
+    scrollbar-width: none;
 }
 
 @mixin breakpoint ($breakpoint) {
@@ -18,9 +25,11 @@
             @content
 
         } 
-    } @else {
+    } 
+    @else {
         @error "Breakpoint '#{$breakpoint}' is not defined."  
         }
 }
+
 
 

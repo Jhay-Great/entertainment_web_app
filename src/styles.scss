@@ -19,3 +19,19 @@ app-root {
     height: 100%;
     @include mix.flex(column, _, _, 1);
 }
+
+app-movies {
+    // display: grid;
+    // grid-template-columns: repeat(3, 1fr);
+    // grid-auto-flow: auto;
+    // grid-auto-rows: auto;
+    // gap: 1rem;
+
+    @include mix.flex(column);
+    padding: 1rem;
+
+    @include mix.breakpoint('large') {
+        margin-left: 6rem;
+    }
+    
+}

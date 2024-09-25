@@ -1,4 +1,36 @@
 <!-- trending -->
+<section class="trending-container">
+    <h2>Trending</h2>
+    <div class="trending-movies-container">
+        @for (movie of movies; track $index) {
+            @if (movie.isTrending) {
+                <div class="trending-movies">
+                    <picture>
+                        <source 
+                            [srcset]="movie.thumbnail.trending.large"
+                            media="(min-width: 768px)"
+                         />
+                         <img [src]="  movie.thumbnail.trending.small " alt=" {{ movie.title}} ">
+                    </picture>
+                    <article class="info">
+                        <p class="year"> {{ movie.year }} </p>
+
+                        <div class="category-container">
+                            <img src="../../../assets/svgs/icon-category-movie.svg" alt="movie svg icon">
+                            <p class="category"> {{ movie.category}} </p>
+
+                        </div>
+
+                        <p class="pg"> {{ movie.rating }}</p>
+                        <p class="title">
+                            {{ movie.title }}
+                        </p>
+                    </article>
+                </div>
+            }
+        }
+    </div>
+</section>
 
 
 <!-- movies -->
