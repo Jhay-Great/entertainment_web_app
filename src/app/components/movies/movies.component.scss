@@ -1,5 +1,11 @@
 @use '../../../sass/mixins' as mix;
 @use '../../../sass/variables' as var;
+@use '../../../sass/function' as func;
+
+h2 {
+    color: var.$color-white;
+    margin-bottom: 1rem;
+}
 
 .trending-movies-container {
     @include mix.flex(row);
@@ -11,6 +17,19 @@
         border-radius: 8px;
         position: relative;
         overflow: hidden;
+
+        .bookmark-img {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 30px;
+            height: 30px;
+            background: func.addTransparency(var.$color-dark-blue, 20%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
         
         picture {
             width: fit-content;
