@@ -10,3 +10,9 @@ export const loadMoviesFailed = createAction(
     '[Movies Api] Load movies failed',
     props<{error: string}>(),
 )
+
+// search functionality
+export const searchMovie = createAction(
+    '[Movie Api] Search movie',
+    props<{searchQuery: string}>()
+)

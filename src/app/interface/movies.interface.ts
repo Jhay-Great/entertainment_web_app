@@ -3,10 +3,16 @@ export interface AppState {
 }
 
 export interface IMoviesState {
-    filterBy: {category:string, query:string},
+    // filterBy: ISearchMovie,
+    searchQuery: string,
     loading: boolean;
     error: string;
     movieList: IMovieData[],
+}
+
+export interface ISearchMovie {
+    category?: string, 
+    query: string
 }
 
 export interface IMovieData {

@@ -1,10 +1,11 @@
 import { createReducer, on } from "@ngrx/store";
 import { IMoviesState } from "../interface/movies.interface";
-import { loadMovies, loadMoviesFailed, loadMoviesIsSuccessful } from "./movie.action";
+import { loadMovies, loadMoviesFailed, loadMoviesIsSuccessful, searchMovie } from "./movie.action";
 
 // initial data
 const initialValue:IMoviesState = {
-    filterBy: {category: '', query: ''},
+    // filterBy: {  query: '' },
+    searchQuery: '',
     loading: false,
     error: '',
     movieList: [],
@@ -21,5 +22,12 @@ export const movieReducer = createReducer(
             loading: false,
         }
     }),
-    on(loadMoviesFailed, (state, {error}) => ({...state, error, loading: false}))
+    on(loadMoviesFailed, (state, {error}) => ({...state, error, loading: false})),
+    // on(searchMovie, (state, {query}) => ({...state, query}))
+    on(searchMovie, (state, {searchQuery}) => {
+        const data = {
+            ...state, searchQuery: searchQuery
+        }
+        return data;
+    })
 )
