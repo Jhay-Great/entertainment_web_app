@@ -80,9 +80,18 @@ h2 {
 .movies {
     @include mix.flex();
     flex-wrap: wrap;
+    justify-content: center;
 
     app-movie-card {
-        @include mix.movie-card(190px);
+        @include mix.movie-card(150px);
+
+        // @include mix.breakpoint('medium') {
+        //     // @include mix.movie-card();
+        // }
+
+        @include mix.breakpoint('large') {
+            @include mix.movie-card(210px);
+        }
         // width: 120px;
         // position: relative;
     }
