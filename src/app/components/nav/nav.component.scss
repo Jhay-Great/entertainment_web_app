@@ -2,6 +2,15 @@
 
 nav {
     @include mix.flex(row, _, center, 1);
+
+
+    @include mix.breakpoint('large') {
+        flex-direction: column;
+        flex-grow: 1;
+        margin-top: 1rem;
+        
+    }
+
 }
 
 .avatar {

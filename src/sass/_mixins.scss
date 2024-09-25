@@ -1,3 +1,5 @@
+@use './variables' as var;
+
 @mixin flex ($direction:row, $justify:flex-start, $align:stretch, $gap:1) {
     display: flex;
     flex-direction: $direction;
@@ -9,3 +11,16 @@
 @mixin position ($position) {
     position: $position;
 }
+
+@mixin breakpoint ($breakpoint) {
+    @if map-has-key($map: var.$map-for-breakpoints, $key: $breakpoint) {
+        @media (min-width: map-get(var.$map-for-breakpoints, $breakpoint)) {
+            @content
+
+        } 
+    } @else {
+        @error "Breakpoint '#{$breakpoint}' is not defined."  
+        }
+}
+
+

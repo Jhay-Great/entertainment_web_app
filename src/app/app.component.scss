@@ -5,6 +5,22 @@ app-nav {
     @include mix.flex(row, space-between, center);
     padding: 1rem;
     background-color: var.$color-semi-dark-blue; 
+
+    @include mix.breakpoint('medium') {
+        margin: 1rem;
+        border-radius: 20px;
+    }
+
+    @include mix.breakpoint('large') {
+            
+            width: 70px;
+            flex-direction: column;
+            position: fixed;
+            margin: 1rem;
+            height: 90dvh;
+            border-radius: 20px;
+            
+    }
 }
 
 app-search {
