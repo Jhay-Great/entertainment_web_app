@@ -33,6 +33,7 @@ picture {
         width: 250px;
         aspect-ratio: 3 / 2;
         width: 100%;
+        object-fit: cover;
 
         // @include mix.breakpoint('large') {
         //     width: 250px;
