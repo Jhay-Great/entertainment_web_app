@@ -8,6 +8,6 @@ app-nav {
 }
 
 app-search {
-    @include mix.flex();
+    @include mix.flex(row, flex-start,center);
     padding: 1rem;
 }
