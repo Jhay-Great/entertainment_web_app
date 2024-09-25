@@ -10,13 +10,20 @@
 
 @mixin position ($position) {
     position: $position;
-    
+
 }
 
 // overflow
 @mixin overflow ($overflow) {
     overflow-x: $overflow;
     scrollbar-width: none;
+}
+
+// movie card
+@mixin movie-card ($width) {
+    overflow: hidden;
+    position: relative;
+    width: $width;
 }
 
 @mixin breakpoint ($breakpoint) {
@@ -30,6 +37,8 @@
         @error "Breakpoint '#{$breakpoint}' is not defined."  
         }
 }
+
+
 
 
 

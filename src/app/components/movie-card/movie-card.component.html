@@ -1,1 +1,40 @@
-<p>movie-card works!</p>
+<!-- <div class="trending-movies"> -->
+    <div class="bookmark-img">
+        <img src="../../../assets/svgs/icon-bookmark-empty.svg" alt="empty bookmark svg">
+    </div>
+    <picture>
+        @if (isTrending) {
+            <source 
+                [srcset]="movie.thumbnail.trending.large"
+                media="(min-width: 768px)"
+             />
+             <img [src]=" movie.thumbnail.trending.small " alt=" {{ movie.title}} ">
+
+        } @else {
+            <source 
+                [srcset]="movie.thumbnail.regular.large"
+                media="(min-width: 992px)"
+             />
+            <source 
+                [srcset]="movie.thumbnail.regular.medium"
+                media="(min-width: 768px)"
+             />
+             <img [src]="  movie.thumbnail.regular.small " alt=" {{ movie.title}} ">
+
+        }
+    </picture>
+    <article class="info">
+        <p class="year"> {{ movie.year }} </p>
+
+        <div class="category-container">
+            <img src="../../../assets/svgs/icon-category-movie.svg" alt="movie svg icon">
+            <p class="category"> {{ movie.category}} </p>
+
+        </div>
+
+        <p class="pg"> {{ movie.rating }}</p>
+        <p class="title">
+            {{ movie.title }}
+        </p>
+    </article>
+<!-- </div> -->

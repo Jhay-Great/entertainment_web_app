@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IMovieData } from '../../interface/movies.interface';
 
 @Component({
   selector: 'app-movie-card',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './movie-card.component.scss'
 })
 export class MovieCardComponent {
+
+  @Input () movie!:IMovieData;
+  @Input () isTrending!:boolean;
 
 }

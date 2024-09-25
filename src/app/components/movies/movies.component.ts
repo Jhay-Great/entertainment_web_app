@@ -5,11 +5,12 @@ import { selectMovieItems, } from '../../state/movie.selector';
 import { Observable, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { MovieCardComponent } from '../movie-card/movie-card.component';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MovieCardComponent],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss'
 })
