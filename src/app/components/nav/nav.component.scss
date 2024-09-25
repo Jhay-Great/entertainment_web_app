@@ -1,0 +1,14 @@
+@use '../../../sass/mixins' as mix;
+
+nav {
+    @include mix.flex(row, _, center, 1);
+}
+
+.avatar {
+    width: 24px;
+    
+    img {
+        width: 100%;
+        aspect-ratio: 1;
+    }
+}

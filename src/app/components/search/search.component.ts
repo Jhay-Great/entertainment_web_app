@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   subscription = Subscription;
   category!: string;
   c!: Observable<string>;
+  placeholder:string = 'Search for movies or TV series'
 
   constructor (
     private store: Store<AppState>,

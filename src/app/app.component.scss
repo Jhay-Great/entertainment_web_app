@@ -1,0 +1,13 @@
+@use '../sass/mixins' as mix;
+@use '../sass/variables' as var;
+
+app-nav {
+    @include mix.flex(row, space-between, center);
+    padding: 1rem;
+    background-color: var.$color-semi-dark-blue; 
+}
+
+app-search {
+    @include mix.flex();
+    padding: 1rem;
+}
