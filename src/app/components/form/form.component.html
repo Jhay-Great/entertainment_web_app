@@ -2,7 +2,7 @@
     <img src="../../../assets/svgs/logo.svg" alt="application svg logo">
 </div>
 <div class="content">
-    <h2>Login</h2>
+    <h2>{{ isLoginActive ? 'Login' : 'Sign Up' }}</h2>
     <!-- form -->
     <form action="">
         <div class="email">
@@ -11,12 +11,19 @@
         <div class="password">
             <input type="password" placeholder="Password">
         </div>
+        
+        @if (!isLoginActive) {
+            <div class="password">
+                <input type="password" placeholder="Password">
+            </div>
+            
+        }
 
-        <button type="submit">Login to your account</button>
+        <button type="submit">{{ isLoginActive ? 'Login to your account' : 'Create an account' }}</button>
         
     </form>
 
     <p class="alternatives">
-        Don't have an account? <span>Sign Up</span>
+        Don't have an account? <span>{{ isLoginActive ? 'Sign Up' : 'Login' }}</span>
     </p>
 </div>

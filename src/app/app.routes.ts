@@ -4,9 +4,15 @@ import { FormComponent } from './components/form/form.component';
 
 export const routes: Routes = [
     {
-        path: 'form',
-        component: FormComponent,
-        title: 'Form'
+        path: 'login',
+        // component: FormComponent,
+        loadComponent: () => import('./components/form/form.component').then(l => l.FormComponent),
+        title: 'Login'
+    },
+    {
+        path: 'sign-up',
+        loadComponent: () => import('./components/form/form.component').then(s => s.FormComponent),
+        title: 'Signup'
     },
     {
         path: '',
