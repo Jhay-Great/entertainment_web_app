@@ -1,0 +1,28 @@
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/variables' as var;
+@use '../../../sass/function' as func;
+
+.content {
+    width: min(500px, 90%);
+    height: fit-content;
+    background-color: var.$color-semi-dark-blue;
+    border-radius: 10px;
+    @include mix.flex(column, _, _, 3);
+    padding: 1.5rem;
+
+    form {
+        width: 100%;
+        @include mix.flex(column, flex-start, flex-start, 2);
+        
+        div {
+            width: 100%;
+            input {
+                width: 100%;
+                background-color: transparent;
+                border: 1px solid transparent;
+                border-bottom: 1px solid var.$color-greyish-blue;
+
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 @use './sass/variables' as var;
 @use './sass/mixins' as mix;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 * {
     margin: 0;
@@ -36,6 +37,13 @@ app-movies {
     
 }
 
+app-form {
+    @include mix.flex(column, center, center, 2);
+    width: 100%;
+    height: 100dvh;
+    background-color: var.$color-dark-blue;
+}
+
 button {
     background-color: transparent;
     border: 1px solid transparent;
@@ -46,3 +54,4 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+

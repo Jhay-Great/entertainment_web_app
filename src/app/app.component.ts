@@ -9,11 +9,12 @@ import { loadMovies } from './state/movie.action';
 import { Observable } from 'rxjs';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { MoviesComponent } from './components/movies/movies.component';
+import { FormComponent } from './components/form/form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SearchComponent, NavComponent, MoviesComponent],
+  imports: [RouterOutlet, SearchComponent, NavComponent, MoviesComponent, FormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
