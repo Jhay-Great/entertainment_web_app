@@ -25,6 +25,12 @@
                 border-bottom: 1px solid var.$color-greyish-blue;
                 height: 100%;
                 padding: 1rem;
+                outline: none;
+                @include mix.font(var.$font-size-bodyM);
+
+                &:active, &:hover {
+                    outline: none;
+                }
                 
             }
         }
@@ -33,14 +39,20 @@
             width: inherit;
             height: 50px;
             border-radius: 6px;
-            background-color: var.$color-white;
-            color: var.$color-semi-dark-blue;
-            font-size: var.$font-size-s;
+            background-color: var.$color-red;
+            @include mix.font(var.$font-size-bodyM, 300);
+            transition: 300ms ease-in-out;
+            
+            &:hover, &:active {
+                background-color: var.$color-white;
+                color: var.$color-semi-dark-blue;
+
+            }
         }
     }
 
     .alternatives {
-        @include mix.font(var.$font-size-s, 200);
+        @include mix.font(var.$font-size-bodyM, 200);
         text-align: center;
         // color: white;
         
