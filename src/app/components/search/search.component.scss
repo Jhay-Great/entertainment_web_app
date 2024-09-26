@@ -10,7 +10,7 @@ input {
     outline: none;
 
     &::placeholder {
-        font-size: var.$font-size-xs;
+        font-size: var.$font-size-bodyM;
     }
 
     &:active, &:hover {

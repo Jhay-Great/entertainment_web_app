@@ -57,11 +57,11 @@ article {
     }
 
     .year, .category, .pg {
-        font-size: var.$font-size-xxs;
+        font-size: var.$font-size-bodyS;
     }
 
     .title {
-        font-size: var.$font-size-xs;
+        font-size: var.$font-size-bodyM;
         grid-column: 1/-1;
     }
     
