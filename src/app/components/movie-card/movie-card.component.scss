@@ -66,3 +66,33 @@ article {
     }
     
 }
+
+.play-container {
+    width: 100%;
+    height: 100%;
+    background-color: func.addTransparency(var.$color-dark-blue, 30%);
+    @include mix.flex(row, center, center);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: all 300ms ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    button {
+        width: fit-content;
+        height: fit-content;
+        @include mix.font(var.$font-size-s, 300);
+        @include mix.flex(row, center, center);
+        border-radius: 30px;
+        background-color: func.addTransparency(var.$color-white, 30%);
+        padding: 0.5rem;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
