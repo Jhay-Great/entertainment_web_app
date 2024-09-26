@@ -6,17 +6,19 @@ import { Observable, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
+import { ToggleVisibilityDirective } from '../../directives/toggle-visibility.directive';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [CommonModule, MovieCardComponent],
+  imports: [CommonModule, MovieCardComponent, ToggleVisibilityDirective],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss'
 })
 export class MoviesComponent implements OnInit {
   movies$!:Observable<IMovieData[]>;
   movies!: IMovieData[];
+  isHomeActive!:boolean;
 
 
   constructor (
@@ -30,7 +32,8 @@ export class MoviesComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(
       switchMap((params) => {
         const param = params.get('category');
-        console.log('logging param: ', param)
+        console.log('logging param: ', param);
+        this.isHomeActive = param === null;
         return this.store.select(selectMovieItems(param))
         // return this.store.select(selectMovies)
       })

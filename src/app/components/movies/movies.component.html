@@ -1,5 +1,5 @@
 <!-- trending -->
-<section class="trending-container">
+<section class="trending-container" [appToggleVisibility]="isHomeActive">
     <h2>Trending</h2>
     <div class="trending-movies-container">
         @for (movie of movies; track $index) {
