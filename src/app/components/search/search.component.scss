@@ -8,6 +8,7 @@ input {
     padding: .5rem;
     color: var.$color-white;
     outline: none;
+    caret-color: var.$color-red;
 
     &::placeholder {
         font-size: var.$font-size-bodyM;
