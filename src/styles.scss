@@ -67,6 +67,10 @@ h2 {
     margin-bottom: 1rem;
 }
 
+input {
+    caret-color: var.$color-red;
+}
+
 router-outlet {
     display: none;
 }
