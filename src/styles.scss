@@ -38,10 +38,16 @@ app-movies {
 }
 
 app-form {
-    @include mix.flex(column, center, center, 2);
+    @include mix.flex(column, flex-start, center, 2);
     width: 100%;
     height: 100dvh;
     background-color: var.$color-dark-blue;
+    padding-top: 5rem;
+    
+    @include mix.breakpoint('large') {
+        padding-top: 3rem;
+
+    }
 }
 
 button {
@@ -59,4 +65,12 @@ h2 {
     @include mix.font();
     color: var.$color-white;
     margin-bottom: 1rem;
+}
+
+router-outlet {
+    display: none;
+}
+
+.hidden {
+    display: none;
 }
