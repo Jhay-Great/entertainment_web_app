@@ -26,6 +26,14 @@
     width: $width;
 }
 
+// font
+@mixin font ($size: var.$font-size-l, $weight: 300, $color: var.$color-white) {
+    font-family: var.$font-family;
+    font-weight: $weight;
+    font-size: $size;
+    color: $color;
+}
+
 @mixin breakpoint ($breakpoint) {
     @if map-has-key($map: var.$map-for-breakpoints, $key: $breakpoint) {
         @media (min-width: map-get(var.$map-for-breakpoints, $breakpoint)) {

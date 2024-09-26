@@ -4,6 +4,11 @@ import { FormComponent } from './components/form/form.component';
 
 export const routes: Routes = [
     {
+        path: 'form',
+        component: FormComponent,
+        title: 'Form'
+    },
+    {
         path: '',
         component: MoviesComponent,
         title: 'Movies',
@@ -11,11 +16,6 @@ export const routes: Routes = [
     {
         path: ':category',
         loadComponent: () => import('./components/movies/movies.component').then(m => m.MoviesComponent)
-    },
-    {
-        path: 'form',
-        component: FormComponent,
-        title: 'Form'
     },
     // {
         //     path: 'form',

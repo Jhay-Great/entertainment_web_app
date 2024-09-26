@@ -55,3 +55,8 @@ a {
     cursor: pointer;
 }
 
+h2 {
+    @include mix.font();
+    color: var.$color-white;
+    margin-bottom: 1rem;
+}
