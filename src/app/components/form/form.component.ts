@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../../services/app-service/app.service';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+import { passwordValidator } from '../../utils/passwordValidator';
 
 @Component({
   selector: 'app-form',
@@ -13,7 +14,8 @@ import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angula
 export class FormComponent implements OnInit {
   // @Output () display:EventEmitter<boolean> = new EventEmitter;
   isLoginActive:boolean = false;
-  form!:FormGroup;
+  // form = FormGroup;
+  form!: FormGroup;
 
   constructor (
     private router: Router,
@@ -38,25 +40,57 @@ export class FormComponent implements OnInit {
         }
       }
     );
-
-    // build reactive form
-    // login form
+    
     if (this.isLoginActive) {
-      this.fb.group({
+      this.form = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.min(8), Validators.max(20)]]
       })
       
     } else {
-      this.fb.group({
+      this.form = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.min(8), Validators.max(20)]],
+        password: ['', [Validators.required, Validators.minLength(8), Validators.max(20)]],
         confirmPassword: ['', [Validators.required, Validators.min(8), Validators.max(20)]]
-      })
+      }, {validators: passwordValidator()} ) //makes the validator accessible in the form group
 
     }
     
   }
+
+  get email () {
+    return this.form.get('email');
+  }
+
+  get password () {
+    return this.form.get('password')
+  }
+  get confirmPassword () {
+    return this.form.get('confirmPassword');
+  }
+
+  checkValidity ():any {
+    const form = this.form;
+    if (!form.valid) {
+      console.log(form.valid); 
+      return;
+    }
+
+    return form.value;
+  }
+
+  login () {
+    const data = this.checkValidity();
+    console.log(data);
+    
+    
+  };
+  
+  signup () {
+    const data = this.checkValidity();
+    console.log('loggin data: ', data);
+    
+  };
 
   handleFormDisplay() {
     // const currentRoute = this.router.url;

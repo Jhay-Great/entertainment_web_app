@@ -4,18 +4,57 @@
 <div class="content">
     <h2>{{ isLoginActive ? 'Login' : 'Sign Up' }}</h2>
     <!-- form -->
-    <form action="">
+    <form [formGroup]="form" (ngSubmit)="isLoginActive ? login() : signup()">
         <div class="email">
-            <input type="email" placeholder="Email">
+            <input type="email" placeholder="Email" formControlName="email">
+            @if ((email?.dirty || email?.touched)) {
+                @if (email?.errors?.['required']) {
+                    <p class="error-message">
+                        Email is required
+                    </p>
+
+                }
+                @if (email?.invalid) {
+                    <p class="error-message">
+                        Invalid email address
+                    </p>
+                }
+            }
         </div>
         <div class="password">
-            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Password" formControlName="password">
+            @if (password?.dirty || password?.touched) {
+                @if (password?.errors?.['minLength']) {
+                    <p class="error-message">
+                        Password should not be less than 8 characters
+                    </p>
+                }
+                @if (password?.errors?.['maxLength']) {
+                    <p class="error-message">
+                        Password should not be more than 20 characters
+                    </p>
+                }
+                @if (password?.errors?.['required']) {
+                    <p class="error-message">
+                        Password is required
+                    </p>
+                }
+            }
         </div>
         
         @if (!isLoginActive) {
             <div class="password">
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" formControlName="confirmPassword">
+                @if (confirmPassword?.dirty || confirmPassword?.touched) {
+
+                    @if (confirmPassword?.errors?.['passwordMismatch']) {
+                        <p class="error-message">
+                            Invalid password, kindly confirm your password
+                        </p>
+                    }
+                }
             </div>
+            
             
         }
 
