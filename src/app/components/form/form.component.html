@@ -66,3 +66,11 @@
         Don't have an account? <span [routerLink]="[isLoginActive ? '/sign-up' : '/login']">{{ isLoginActive ? 'Sign Up' : 'Login' }}</span>
     </p>
 </div>
+
+
+<!-- notification -->
+@if (isResponseActive) {
+    <p>
+        {{ response | async }}
+    </p>
+}

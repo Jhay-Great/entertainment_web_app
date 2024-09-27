@@ -6,11 +6,12 @@ import { passwordValidator } from '../../utils/passwordValidator';
 import { AuthService } from '../../services/auth/auth.service';
 import { Observable } from 'rxjs';
 import { ISuccess } from '../../interface/auth.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
@@ -19,7 +20,8 @@ export class FormComponent implements OnInit {
   isLoginActive:boolean = false;
   // form = FormGroup;
   form!: FormGroup;
-  response!:Observable<ISuccess>
+  isResponseActive:boolean = false;
+  response!:Observable<string>
 
   constructor (
     private router: Router,
@@ -95,7 +97,8 @@ export class FormComponent implements OnInit {
     const data = this.checkValidity();
     console.log(data);
     this.response = this.authService.login(data);
-    console.log(this.response);
+    this.isResponseActive = true;
+
 
     
     
@@ -107,7 +110,8 @@ export class FormComponent implements OnInit {
 
     const { email, password } = data;
     
-    this.authService.signUp({email, password});
+    this.response = this.authService.signUp({email, password});
+    this.isResponseActive = true;
     
   };
 

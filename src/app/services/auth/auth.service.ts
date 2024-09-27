@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IAuth } from '../../interface/auth.interface';
 import { catchError, map, Observable, of, pipe, tap } from 'rxjs';
 import { LocalStorageService } from '../localStorage/local-storage.service';
+import { AppService } from '../app-service/app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
+    private appService: AppService,
     private localStorage: LocalStorageService,
   ) { }
 
@@ -19,6 +21,8 @@ export class AuthService {
   login(data:IAuth) {
     const response = this.post(`${this.apiUrl}/login`, data);
     return this.handleResponse(response);
+    // const message = this.handleResponse(response);
+    // this.appService.notify(message)
     // response.pipe(
     //   tap(response => {
     //     console.log('logging response after login: ', response),
@@ -34,18 +38,19 @@ export class AuthService {
   signUp (data:IAuth) {
     console.log('called sign up fn...')
     const response = this.post(`${this.apiUrl}/register`, data);
-    response.pipe(
-      tap(response => {
-        console.log('logging data after sign up: ', response);
-      }),
-      map(response => {
-        return response;
-      }),
-      catchError(error => {
-        const { message } = error.error;
-        return of(message);
-      })
-    ).subscribe()
+    return this.handleResponse(response);
+    // response.pipe(
+    //   tap(response => {
+    //     console.log('logging data after sign up: ', response);
+    //   }),
+    //   map(response => {
+    //     return response;
+    //   }),
+    //   catchError(error => {
+    //     const { message } = error.error;
+    //     return of(message);
+    //   })
+    // ).subscribe()
   }
 
   // handles post requests
@@ -56,7 +61,7 @@ export class AuthService {
 
 
   // custom operator
-  handleResponse (source:Observable<any>) {
+  handleResponse (source:Observable<any>):Observable<string> {
     return source.pipe(
       tap(response => {
         console.log('logging data after sign up: ', response);
