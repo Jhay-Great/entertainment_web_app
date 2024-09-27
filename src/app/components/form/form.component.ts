@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AppService } from '../../services/app-service/app.service';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
   // @Output () display:EventEmitter<boolean> = new EventEmitter;
   isLoginActive:boolean = false;
   // form = FormGroup;
@@ -69,6 +69,11 @@ export class FormComponent implements OnInit {
 
     }
     
+  }
+
+  ngOnDestroy(): void {
+    this.signUpSubscription.unsubscribe();
+    this.loginSubscription.unsubscribe();
   }
 
   // getter function to get the email control
