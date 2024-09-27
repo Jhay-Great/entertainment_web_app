@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { IMoviesState } from "../interface/movies.interface";
-import { loadMovies, loadMoviesFailed, loadMoviesIsSuccessful, searchMovie } from "./movie.action";
+import { bookmarkMovies, loadMovies, loadMoviesFailed, loadMoviesIsSuccessful, searchMovie } from "./movie.action";
 
 // initial data
 const initialValue:IMoviesState = {
@@ -29,5 +29,21 @@ export const movieReducer = createReducer(
             ...state, searchQuery: searchQuery
         }
         return data;
+    }),
+    on(bookmarkMovies, (state, {bookmarked}) => {
+        const { id, isBookmarked } = bookmarked;
+        const { movieList } = state;
+        const data = movieList.map(movie => {
+            if (movie.id !== id) return movie;
+            return {
+                ...movie,
+                isBookmarked,
+            }
+            
+        })
+        return {
+            ...state,
+            movieList: data,
+        }
     })
 )

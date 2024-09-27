@@ -16,6 +16,7 @@ export interface ISearchMovie {
 }
 
 export interface IMovieData {
+    id: string;
     title: string;
     thumbnail: IThumbnail;
     year: number;
@@ -37,4 +38,9 @@ export interface IRegular {
     small: string;
     medium: string;
     large: string;
+}
+
+export interface IBookmarked {
+    id: string;
+    isBookmarked: boolean;
 }

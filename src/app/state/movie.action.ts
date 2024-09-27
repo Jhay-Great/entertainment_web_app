@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IMovieData } from '../interface/movies.interface';
+import { IBookmarked, IMovieData } from '../interface/movies.interface';
 
 export const loadMovies = createAction('[Movies Api] Loads movies');
 export const loadMoviesIsSuccessful = createAction(
@@ -15,4 +15,10 @@ export const loadMoviesFailed = createAction(
 export const searchMovie = createAction(
     '[Movie Api] Search movie',
     props<{searchQuery: string}>()
+)
+
+// bookmarks
+export const bookmarkMovies = createAction(
+    '[Bookmarks Api] Bookmarks movie',
+    props<{bookmarked:IBookmarked}>(),
 )
