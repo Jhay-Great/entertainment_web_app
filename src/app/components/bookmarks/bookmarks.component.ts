@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState, IMovieData } from '../../interface/movies.interface';
 import { selectBookmarked } from '../../state/movie.selector';
 import { Observable } from 'rxjs';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MovieCardComponent } from "../movie-card/movie-card.component";
 
 @Component({
