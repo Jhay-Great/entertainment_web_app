@@ -117,6 +117,8 @@ export class FormComponent implements OnInit, OnDestroy {
         this.isResponseActive = true;
         this.notification = 'login successful';
         console.log(value);
+        this.authService.setAuthentication(true);
+        this.router.navigate(['bookmarks']);
       },
       error: err => {
         this.isResponseActive = true;
@@ -145,7 +147,7 @@ export class FormComponent implements OnInit, OnDestroy {
     // subscribes to the returned observable
     this.signUpSubscription = response.subscribe({
       next: response => {
-        const { message } = data;
+        const { message } = response;
         this.notification = message;
         this.isResponseActive = true;
         this.router.navigate(['/login']);
