@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AppService } from '../../services/app-service/app.service';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from '../../utils/passwordValidator';
@@ -7,7 +7,7 @@ import { passwordValidator } from '../../utils/passwordValidator';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ReactiveFormsModule,],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })

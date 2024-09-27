@@ -63,6 +63,6 @@
     </form>
 
     <p class="alternatives">
-        Don't have an account? <span>{{ isLoginActive ? 'Sign Up' : 'Login' }}</span>
+        Don't have an account? <span [routerLink]="[isLoginActive ? '/sign-up' : '/login']">{{ isLoginActive ? 'Sign Up' : 'Login' }}</span>
     </p>
 </div>
