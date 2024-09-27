@@ -105,9 +105,9 @@ export class FormComponent implements OnInit {
         this.isResponseActive = true;
         return data;
       }),
-      tap(data => {
-        this.router.navigate(['', 'bookmarks'])
-      })
+      // tap(data => {
+      //   // this.router.navigate(['', 'bookmarks'])
+      // }) // not needed using route guard
     ).subscribe();
 
 

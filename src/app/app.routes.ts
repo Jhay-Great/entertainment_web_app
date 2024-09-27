@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { MoviesComponent } from './components/movies/movies.component';
 import { FormComponent } from './components/form/form.component';
+import { isAuthenticatedGuard } from './routeGuard/is-authenticated.guard';
+import { BookmarksComponent } from './components/bookmarks/bookmarks.component';
 
 export const routes: Routes = [
     {
@@ -12,7 +14,13 @@ export const routes: Routes = [
     {
         path: 'sign-up',
         loadComponent: () => import('./components/form/form.component').then(s => s.FormComponent),
-        title: 'Signup'
+        title: 'Signup',
+    },
+    {
+        path: 'bookmarks',
+        loadComponent: () => import('./components/bookmarks/bookmarks.component').then(b => b.BookmarksComponent),
+        title: 'Your bookmarks',
+        canActivate: [isAuthenticatedGuard]
     },
     {
         path: '',
@@ -23,14 +31,4 @@ export const routes: Routes = [
         path: ':category',
         loadComponent: () => import('./components/movies/movies.component').then(m => m.MoviesComponent)
     },
-    // {
-        //     path: 'form',
-        //     loadComponent: () => import('./components/form/form.component').then(f => f.FormComponent),
-        //     title: 'Form'
-        // }
-        
-        // { 
-        //     path: '**',
-        //     redirectTo: ''
-        // },
-    ];
+];
