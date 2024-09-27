@@ -99,15 +99,15 @@ export class FormComponent implements OnInit {
     
   };
 
-  handleFormDisplay() {
-    // const currentRoute = this.router.url;
-    // if (currentRoute === 'form') {
-    //   console.log(true);
-    //   this.display.emit(false);
-    // }
-    // else {
-    //   this.display.emit(true);
-    // }
-  }
+  // handleFormDisplay() {
+  //   // const currentRoute = this.router.url;
+  //   // if (currentRoute === 'form') {
+  //   //   console.log(true);
+  //   //   this.display.emit(false);
+  //   // }
+  //   // else {
+  //   //   this.display.emit(true);
+  //   // }
+  // }
 
 }
