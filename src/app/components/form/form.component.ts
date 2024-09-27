@@ -41,13 +41,16 @@ export class FormComponent implements OnInit {
       }
     );
     
+    // builds forms
     if (this.isLoginActive) {
+      // login form
       this.form = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.min(8), Validators.max(20)]]
       })
       
     } else {
+      // sign up form
       this.form = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8), Validators.max(20)]],
@@ -58,13 +61,17 @@ export class FormComponent implements OnInit {
     
   }
 
+  // getter function to get the email control
   get email () {
     return this.form.get('email');
   }
 
+  // getter function to get the email control
   get password () {
     return this.form.get('password')
   }
+  
+  // getter function to get the email control
   get confirmPassword () {
     return this.form.get('confirmPassword');
   }
