@@ -26,4 +26,10 @@ export class AppService {
     this.notification = message;
     this.isNotifyActive = true;
   }
+
+  // timeout (seconds:number) {
+  //   setTimeout(() => {
+  //     this.isResponseActive = false;
+  //   }, seconds);
+  // }
 }

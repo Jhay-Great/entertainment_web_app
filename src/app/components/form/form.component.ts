@@ -108,6 +108,7 @@ export class FormComponent implements OnInit, OnDestroy {
     console.log(data);
     const response = this.authService.login(data);
 
+    // subscribes to the returned observable
     this.loginSubscription = response.subscribe({
       next: value => {
         this.isResponseActive = true;
@@ -119,7 +120,10 @@ export class FormComponent implements OnInit, OnDestroy {
         this.notification = err.message;
         console.log(err);
       },
-      complete: () => 'done',
+      complete: () => {
+        this.timeout(5000);
+        console.log('done');
+      },
     })
     
   };
@@ -130,27 +134,54 @@ export class FormComponent implements OnInit, OnDestroy {
     const { email, password } = data;
     
     const response = this.authService.signUp({email, password});
-    this.signUpSubscription = response.pipe(
-      map(data => {
-        console.log('logging data: ', data);
+
+    // subscribes to the returned observable
+    this.signUpSubscription = response.subscribe({
+      next: response => {
         const { message } = data;
         this.notification = message;
         this.isResponseActive = true;
+        this.router.navigate(['/login']);
         return data;
-      }),
-      tap(data => {
-        const { success } = data;
-        if (success) {
-          this.router.navigate(['/login'])
+      },
+      error: err => {
+        this.isResponseActive = true;
+        this.notification = err.message;
+        this.timeout(5000);
+      },
+      complete: () => {
+        this.timeout(5000);
+        console.log('done');
+      }
+    })
+    
+    // this.signUpSubscription = response.pipe(
+    //   map(data => {
+    //     console.log('logging data: ', data);
+    //     const { message } = data;
+    //     this.notification = message;
+    //     this.isResponseActive = true;
+    //     return data;
+    //   }),
+    //   tap(data => {
+    //     const { success } = data;
+    //     if (success) {
+    //       this.router.navigate(['/login'])
 
-        } 
-      })
-    ).subscribe();
+    //     } 
+    //   })
+    // ).subscribe();
 
     // this.signUpSubscription.unsubscribe();
 
     
   };
+
+  timeout (seconds:number) {
+    setTimeout(() => {
+      this.isResponseActive = false;
+    }, seconds);
+  }
 
   // handleFormDisplay() {
   //   // const currentRoute = this.router.url;
