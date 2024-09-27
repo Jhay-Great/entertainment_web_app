@@ -7,6 +7,7 @@ import { Store } from "@ngrx/store";
 import { selectAllMovies } from "./movie.selector";
 import { v4 as uuid } from 'uuid';
 import { LocalStorageService } from "../services/localStorage/local-storage.service";
+import { IMovieData } from "../interface/movies.interface";
 
 @Injectable()
 export class MovieEffect {
@@ -15,14 +16,21 @@ export class MovieEffect {
             ofType(loadMovies),
             mergeMap(() => 
                 this.moviesService.fetchData().pipe(
-                    map(data => 
-                        data.map(movie => {
+                    map(data => {
+                        const moviesInLocalStorage:IMovieData[] = this.localStorage.getItem('movies');
+                        if (moviesInLocalStorage) {
+                            loadMoviesIsSuccessful({movies: moviesInLocalStorage});
+                        }
+
+                        return data.map(movie => {
                             return {
                                 ...movie,
                                 id: uuid(),
                                 isBookmarked: false,
                             }
                         })
+
+                    }
                     ), 
                     map(movies => (
                         this.localStorage.setItem('movies', movies),
@@ -42,7 +50,10 @@ export class MovieEffect {
     //         ofType(bookmarkMovies),
     //         mergeMap(() => 
     //             this.store.select(selectAllMovies).pipe(
-    //                 this.
+    //                 map(data => {
+    //                     return this.localStorage.setItem('movies', data);
+    //                 })
+    //                 // this.localStorage.setItem()
     //             )
     //         )
     //     )

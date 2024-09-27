@@ -9,15 +9,12 @@ export class LocalStorageService {
 
   // Local storage
   getItem (key:string) {
-    console.log('logging from local', localStorage.getItem(key));
-    if (localStorage.getItem(key)) {
-      return localStorage.getItem(key) 
-
-    }else return 'nothing';
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
   }
 
   setItem (key:string, item:any):void {
-    localStorage.setItem(key, item);
+    localStorage.setItem(key, JSON.stringify(item));
   }
 
   delete (key:string) {
@@ -37,15 +34,20 @@ class SessionStorage {
   
   // Session storage
   getItemFromSessionStorage (key:string) {
-    return sessionStorage.getItem(key);
+    const data = sessionStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
   }
   
   setItemToSessionStorage (key:string, item:any):void {
-    sessionStorage.setItem(key, item);
+    sessionStorage.setItem(key, JSON.stringify(item));
   }
   
   deleteItemFromSessionStorage (key:string) {
     sessionStorage.removeItem(key);
+  }
+
+  clearStorage () {
+    sessionStorage.clear();
   }
 
   
