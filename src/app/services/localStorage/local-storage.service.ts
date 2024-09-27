@@ -9,7 +9,11 @@ export class LocalStorageService {
 
   // Local storage
   getItem (key:string) {
-    return localStorage.getItem(key) 
+    console.log('logging from local', localStorage.getItem(key));
+    if (localStorage.getItem(key)) {
+      return localStorage.getItem(key) 
+
+    }else return 'nothing';
   }
 
   setItem (key:string, item:any):void {

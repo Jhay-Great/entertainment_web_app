@@ -6,9 +6,10 @@ import { AuthService } from '../services/auth/auth.service';
 
 export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const { isLoggedIn } = inject(AuthService);
+  // const { isLoggedIn } = inject(AuthService);
+  const authService = inject(AuthService);
 
-  if (!isLoggedIn()) {
+  if (!authService.isAuthenticated) { 
     router.navigate(['/sign-up']);
     return false;
   }

@@ -24,14 +24,16 @@ export class MovieCardComponent {
 
   checkValidation () {
     const validity = this.authService.isLoggedIn();
-    if (!validity) {
-      this.router.navigate(['/sign-up']);
-      return false;
-    }
+    console.log('validity: ', validity);
+    // if (!validity) {
+    //   this.router.navigate(['/sign-up']);
+    //   return false;
+    // }
     return true;
   };
 
   handleBookmark () {
+    console.log('called....')
     const valid = this.checkValidation();
     if (!valid) return;
     

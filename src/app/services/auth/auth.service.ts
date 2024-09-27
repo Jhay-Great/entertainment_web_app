@@ -2,15 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAuth, ISuccess } from '../../interface/auth.interface';
 import { catchError, map, Observable, of, pipe, tap } from 'rxjs';
-import { LocalStorageService } from '../localStorage/local-storage.service';
+// import { LocalStorageService } from '../localStorage/local-storage.service';
 import { AppService } from '../app-service/app.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../localStorage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   apiUrl:string = 'https://entertainment-web-app-backend-2.onrender.com/api';
+  isAuthenticated:boolean = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -66,8 +68,14 @@ export class AuthService {
 
   // checks if user is logged in
   isLoggedIn () {
+    // const token = this.localStorage.getItem('token');
     const token = this.localStorage.getItem('token');
-    if (!token) return false;
+    console.log(token);
+    if (!token) {
+      this.isAuthenticated = false;
+      return false;
+    };
+    this.isAuthenticated = true;
     return true;
 
   }
