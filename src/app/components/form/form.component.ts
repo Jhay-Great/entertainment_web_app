@@ -4,7 +4,7 @@ import { AppService } from '../../services/app-service/app.service';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from '../../utils/passwordValidator';
 import { AuthService } from '../../services/auth/auth.service';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ISuccess } from '../../interface/auth.interface';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +21,8 @@ export class FormComponent implements OnInit {
   // form = FormGroup;
   form!: FormGroup;
   isResponseActive:boolean = false;
-  response!:Observable<string>
+  // response!:Observable<string>
+  notification!:string;
 
   constructor (
     private router: Router,
@@ -96,8 +97,18 @@ export class FormComponent implements OnInit {
   login () {
     const data = this.checkValidity();
     console.log(data);
-    this.response = this.authService.login(data);
-    this.isResponseActive = true;
+    const response = this.authService.login(data);
+    response.pipe(
+      map(data => {
+        const { message, success } = data;
+        this.notification = message;
+        this.isResponseActive = true;
+        return data;
+      }),
+      tap(data => {
+        this.router.navigate(['', 'bookmarks'])
+      })
+    ).subscribe();
 
 
     
@@ -110,8 +121,25 @@ export class FormComponent implements OnInit {
 
     const { email, password } = data;
     
-    this.response = this.authService.signUp({email, password});
-    this.isResponseActive = true;
+    const response = this.authService.signUp({email, password});
+    response.pipe(
+      map(data => {
+        const { message } = data;
+        this.notification = message;
+        this.isResponseActive = true;
+        return data;
+      }),
+      tap(data => {
+        const { success } = data;
+        if (success) {
+          this.router.navigate(['/login'])
+
+        } else {
+          // this.router.nav
+        }
+      })
+    ).subscribe();
+
     
   };
 

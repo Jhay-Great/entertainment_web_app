@@ -6,7 +6,10 @@ export interface IAuth {
 
 export interface ISuccess {
     message:string;
+    success: boolean;
 }
+
+
 
 export interface IError {
     error:{ message: string };
