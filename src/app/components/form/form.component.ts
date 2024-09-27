@@ -117,6 +117,7 @@ export class FormComponent implements OnInit, OnDestroy {
         this.isResponseActive = true;
         this.notification = 'login successful';
         console.log(value);
+        this.localStorage.setItem('token', value.message);
         this.authService.setAuthentication(true);
         this.router.navigate(['bookmarks']);
       },
