@@ -3,6 +3,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AppService } from '../../services/app-service/app.service';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from '../../utils/passwordValidator';
+import { AuthService } from '../../services/auth/auth.service';
+import { Observable } from 'rxjs';
+import { ISuccess } from '../../interface/auth.interface';
 
 @Component({
   selector: 'app-form',
@@ -16,12 +19,14 @@ export class FormComponent implements OnInit {
   isLoginActive:boolean = false;
   // form = FormGroup;
   form!: FormGroup;
+  response!:Observable<ISuccess>
 
   constructor (
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private appService: AppService,
     private fb: FormBuilder,
+    private authService: AuthService,
   ) {};
 
   ngOnInit(): void {
@@ -80,7 +85,7 @@ export class FormComponent implements OnInit {
     const form = this.form;
     if (!form.valid) {
       console.log(form.valid); 
-      return;
+      return 'in valid data entry';
     }
 
     return form.value;
@@ -89,13 +94,20 @@ export class FormComponent implements OnInit {
   login () {
     const data = this.checkValidity();
     console.log(data);
+    this.response = this.authService.login(data);
+    console.log(this.response);
+
     
     
   };
   
   signup () {
     const data = this.checkValidity();
-    console.log('loggin data: ', data);
+    console.log('logging data: ', data);
+
+    const { email, password } = data;
+    
+    this.authService.signUp({email, password});
     
   };
 

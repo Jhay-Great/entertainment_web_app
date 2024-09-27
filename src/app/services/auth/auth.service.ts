@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAuth } from '../../interface/auth.interface';
-import { Observable, tap } from 'rxjs';
+import { catchError, map, Observable, of, pipe, tap } from 'rxjs';
 import { LocalStorageService } from '../localStorage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl:string = '';
+  apiUrl:string = 'https://entertainment-web-app-backend-2.onrender.com/api';
 
   constructor(
     private httpClient: HttpClient,
@@ -17,27 +17,58 @@ export class AuthService {
 
   // login
   login(data:IAuth) {
-    const response = this.post(data);
-    response.pipe(
-      tap(response => {
-        console.log(response),
-        // stores the token in local storage
-        this.localStorage.setItem('token', response);
-      })
-    )
+    const response = this.post(`${this.apiUrl}/login`, data);
+    return this.handleResponse(response);
+    // response.pipe(
+    //   tap(response => {
+    //     console.log('logging response after login: ', response),
+    //     // stores the token in local storage
+    //     this.localStorage.setItem('token', response);
+    //     // inserts interceptors
+    //     // handles routing
+    //   })
+    // )
   }
 
   // signup
   signUp (data:IAuth) {
-    const response = this.post(data);
+    console.log('called sign up fn...')
+    const response = this.post(`${this.apiUrl}/register`, data);
+    response.pipe(
+      tap(response => {
+        console.log('logging data after sign up: ', response);
+      }),
+      map(response => {
+        return response;
+      }),
+      catchError(error => {
+        const { message } = error.error;
+        return of(message);
+      })
+    ).subscribe()
   }
 
-  // post
-  private post (data:IAuth):Observable<IAuth> {
-    return this.httpClient.post<IAuth>(this.apiUrl, data);
+  // handles post requests
+  private post (url:string, data:IAuth):Observable<any> {
+    console.log(data);
+    return this.httpClient.post<IAuth>(url, data);
   }
 
 
+  // custom operator
+  handleResponse (source:Observable<any>) {
+    return source.pipe(
+      tap(response => {
+        console.log('logging data after sign up: ', response);
+      }),
+      map(response => {
+        return response;
+      }),
+      catchError(error => {
+        const { message } = error.error;
+        return of(message);
+      }))
+  }
 
   // log out
 }
