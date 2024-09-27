@@ -4,7 +4,7 @@ import { AppService } from '../../services/app-service/app.service';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator } from '../../utils/passwordValidator';
 import { AuthService } from '../../services/auth/auth.service';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, Subscription, tap } from 'rxjs';
 import { ISuccess } from '../../interface/auth.interface';
 import { CommonModule } from '@angular/common';
 
@@ -23,6 +23,8 @@ export class FormComponent implements OnInit {
   isResponseActive:boolean = false;
   // response!:Observable<string>
   notification!:string;
+  signUpSubscription = new Subscription;
+  loginSubscription = new Subscription;
 
   constructor (
     private router: Router,
@@ -98,32 +100,34 @@ export class FormComponent implements OnInit {
     const data = this.checkValidity();
     console.log(data);
     const response = this.authService.login(data);
-    response.pipe(
+    this.loginSubscription = response.pipe(
       map(data => {
+        console.log('response from loggin: ');
         const { message, success } = data;
-        this.notification = message;
+        this.notification = 'login successful';
         this.isResponseActive = true;
+        this.authService.setAuthentication(true);
         return data;
       }),
-      // tap(data => {
-      //   // this.router.navigate(['', 'bookmarks'])
-      // }) // not needed using route guard
+      tap(data => {
+        this.router.navigate(['bookmarks'])
+      }) // not needed using route guard
     ).subscribe();
 
-
+    // this.loginSubscription.unsubscribe();
     
     
   };
   
   signup () {
     const data = this.checkValidity();
-    console.log('logging data: ', data);
-
+    
     const { email, password } = data;
     
     const response = this.authService.signUp({email, password});
-    response.pipe(
+    this.signUpSubscription = response.pipe(
       map(data => {
+        console.log('logging data: ', data);
         const { message } = data;
         this.notification = message;
         this.isResponseActive = true;
@@ -134,11 +138,11 @@ export class FormComponent implements OnInit {
         if (success) {
           this.router.navigate(['/login'])
 
-        } else {
-          // this.router.nav
-        }
+        } 
       })
     ).subscribe();
+
+    // this.signUpSubscription.unsubscribe();
 
     
   };

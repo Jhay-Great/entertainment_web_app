@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { AppState, IMovieData } from '../../interface/movies.interface';
+import { AppState, IBookmarked, IMovieData } from '../../interface/movies.interface';
 import { Store } from '@ngrx/store';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { bookmarkMovies } from '../../state/movie.action';
 
 @Component({
   selector: 'app-movie-card',
@@ -25,10 +26,10 @@ export class MovieCardComponent {
   checkValidation () {
     const validity = this.authService.isLoggedIn();
     console.log('validity: ', validity);
-    // if (!validity) {
-    //   this.router.navigate(['/sign-up']);
-    //   return false;
-    // }
+    if (!validity) {
+      this.router.navigate(['/sign-up']);
+      return false;
+    }
     return true;
   };
 
@@ -36,9 +37,14 @@ export class MovieCardComponent {
     console.log('called....')
     const valid = this.checkValidation();
     if (!valid) return;
+
+    const { id } = this.movie;
+    const isBookmarked = !this.movie.isBookmarked
+    console.log(isBookmarked, id);
+    const bookmarked:IBookmarked = { id, isBookmarked };
     
     // dispatches action
-    // this.store.dispatch()
+    this.store.dispatch(bookmarkMovies({bookmarked}))
   };
 
 }

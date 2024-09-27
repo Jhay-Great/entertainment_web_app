@@ -1,6 +1,12 @@
 <!-- <div class="trending-movies"> -->
     <button class="bookmark-img" (click)="handleBookmark()">
-        <img src="../../../assets/svgs/icon-bookmark-empty.svg" alt="empty bookmark svg">
+        @if (movie.isBookmarked) {
+            <img src="../../../assets/svgs/icon-bookmark-full.svg" alt="empty bookmark svg">
+
+        } @else {
+            <img src="../../../assets/svgs/icon-bookmark-empty.svg" alt="empty bookmark svg">
+
+        }
     </button>
     <picture>
         @if (isTrending) {

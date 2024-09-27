@@ -11,7 +11,7 @@ import { LocalStorageService } from '../localStorage/local-storage.service';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl:string = 'https://entertainment-web-app-backend-2.onrender.com/api';
+  private apiUrl:string = 'https://entertainment-web-app-backend-2.onrender.com/api';
   isAuthenticated:boolean = false;
 
   constructor(
@@ -78,6 +78,10 @@ export class AuthService {
     this.isAuthenticated = true;
     return true;
 
+  }
+
+  setAuthentication (status:boolean) {
+    this.isAuthenticated = status;
   }
 
   // log out

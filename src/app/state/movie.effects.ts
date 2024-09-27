@@ -48,7 +48,7 @@ export class MovieEffect {
     // updateMovieStatus$ = createEffect(() => 
     //     this.action$.pipe(
     //         ofType(bookmarkMovies),
-    //         mergeMap(() => 
+    //         switchMap(() => 
     //             this.store.select(selectAllMovies).pipe(
     //                 map(data => {
     //                     return this.localStorage.setItem('movies', data);
