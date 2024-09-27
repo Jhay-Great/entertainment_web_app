@@ -1,1 +1,43 @@
-<p>bookmarks works!</p>
+
+@if ( (bookmarkedMovies | async)?.length === 0 ) {
+    <p>
+        Bookmark is current empty
+    </p>
+}
+
+
+@if ( (bookmarkedMovies | async)?.length !== 0 ) {
+    <!-- Tv shows -->
+    <section class="tv-series">
+        <h2>TV Series</h2>
+        <section class="bookmarked-tv-series">
+            @for(movie of (bookmarkedMovies | async); track $index) {
+                @if (movie.category === 'TV Series') {
+                    <app-movie-card 
+                        [movie]="movie"
+                     />
+                }
+            }
+
+        </section>
+    </section>
+    
+
+    <!-- Movies -->
+     
+    <section class="movies">
+        <h2>Movies</h2>
+        <section class="bookmarked-movies">
+            @for(movie of (bookmarkedMovies | async); track $index) {
+                @if (movie.category === 'Movies') {
+                    <app-movie-card 
+                        [movie]="movie"
+                     />
+                }
+            }
+
+        </section>
+    </section>
+}
+
+
