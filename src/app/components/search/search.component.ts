@@ -25,15 +25,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   ) {};
 
   ngOnInit(): void {
-    console.log('search component')
     const searchInput = document.querySelector('input') as HTMLInputElement
-    console.log(searchInput);
 
     fromEvent(searchInput, 'input').pipe(
       map((event:Event) => (event.target as HTMLInputElement).value),
       debounceTime(300),
       tap(data => {
-        console.log('input value: ', data)
+        // console.log('input value: ', data)
       }),
       map(data => {
         // console.log(data);

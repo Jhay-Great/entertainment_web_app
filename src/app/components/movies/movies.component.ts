@@ -32,18 +32,16 @@ export class MoviesComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(
       switchMap((params) => {
         const param = params.get('category');
-        console.log('logging param: ', param);
         this.isHomeActive = param === null;
         return this.store.select(selectMovieItems(param))
         // return this.store.select(selectMovies)
       })
     ).subscribe({
       next: (data) => {
-        console.log('logging in subscription: ', data)
         this.movies = data;
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
         // display to UI
       },
       complete: () => 'done',

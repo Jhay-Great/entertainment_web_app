@@ -71,6 +71,10 @@ input {
     caret-color: var.$color-red;
 }
 
+a {
+    cursor: pointer;
+}
+
 router-outlet {
     display: none;
 }

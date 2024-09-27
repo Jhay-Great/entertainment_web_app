@@ -43,7 +43,6 @@ export class FormComponent implements OnInit, OnDestroy {
     // gets current route path
     this.activatedRoute.url.subscribe(
       (UrlSegment) => {
-        console.log('current url: ', UrlSegment[0].path);
         const url = UrlSegment[0].path;
         if (url === 'login') {
           this.isLoginActive = true;
@@ -97,7 +96,7 @@ export class FormComponent implements OnInit, OnDestroy {
     const form = this.form;
     if (!form.valid) {
       console.log(form.valid); 
-      return 'in valid data entry';
+      return false;
     }
 
     return form.value;
@@ -106,6 +105,10 @@ export class FormComponent implements OnInit, OnDestroy {
   login () {
     const data = this.validateForm();
     console.log(data);
+    if (!data) {
+      return;
+    }
+
     const response = this.authService.login(data);
 
     // subscribes to the returned observable
@@ -130,6 +133,10 @@ export class FormComponent implements OnInit, OnDestroy {
   
   signup () {
     const data = this.validateForm();
+
+    if (!data) {
+      return;
+    }
     
     const { email, password } = data;
     
