@@ -44,7 +44,7 @@ export class MovieCardComponent {
     const bookmarked:IBookmarked = { id, isBookmarked };
     
     // dispatches action
-    this.store.dispatch(bookmarkMovies({bookmarked}))
+    this.store.dispatch(bookmarkMovies({bookmarked}));
   };
 
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAuth, ISuccess } from '../../interface/auth.interface';
-import { catchError, map, Observable, of, pipe, tap } from 'rxjs';
+import { catchError, map, Observable, of, pipe, tap, throwError } from 'rxjs';
 // import { LocalStorageService } from '../localStorage/local-storage.service';
 import { AppService } from '../app-service/app.service';
 import { Router } from '@angular/router';
@@ -54,15 +54,18 @@ export class AuthService {
           message: serverResponse,
           success: true,
         }
+        console.log('no error occurred')
         return response;
       }),
       catchError(error => {
         const { message } = error.error;
+        console.log('error occurred')
         const response = {
           message,
           success: false,
         }
-        return of(response);
+        return throwError(() => response);
+        // return of(response);
       }))
   }
 
@@ -81,6 +84,7 @@ export class AuthService {
   }
 
   setAuthentication (status:boolean) {
+
     this.isAuthenticated = status;
   }
 

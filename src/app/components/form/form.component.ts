@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { map, Observable, Subscription, tap } from 'rxjs';
 import { ISuccess } from '../../interface/auth.interface';
 import { CommonModule } from '@angular/common';
+import { LocalStorageService } from '../../services/localStorage/local-storage.service';
 
 @Component({
   selector: 'app-form',
@@ -32,6 +33,7 @@ export class FormComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private fb: FormBuilder,
     private authService: AuthService,
+    private localStorage: LocalStorageService,
   ) {};
 
   ngOnInit(): void {
@@ -91,7 +93,7 @@ export class FormComponent implements OnInit, OnDestroy {
     return this.form.get('confirmPassword');
   }
 
-  checkValidity ():any {
+  validateForm ():any {
     const form = this.form;
     if (!form.valid) {
       console.log(form.valid); 
@@ -102,30 +104,28 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   login () {
-    const data = this.checkValidity();
+    const data = this.validateForm();
     console.log(data);
     const response = this.authService.login(data);
-    this.loginSubscription = response.pipe(
-      map(data => {
-        console.log('response from loggin: ');
-        const { message, success } = data;
-        this.notification = 'login successful';
-        this.isResponseActive = true;
-        this.authService.setAuthentication(true);
-        return data;
-      }),
-      tap(data => {
-        this.router.navigate(['bookmarks'])
-      }) // not needed using route guard
-    ).subscribe();
 
-    // this.loginSubscription.unsubscribe();
-    
+    this.loginSubscription = response.subscribe({
+      next: value => {
+        this.isResponseActive = true;
+        this.notification = 'login successful';
+        console.log(value);
+      },
+      error: err => {
+        this.isResponseActive = true;
+        this.notification = err.message;
+        console.log(err);
+      },
+      complete: () => 'done',
+    })
     
   };
   
   signup () {
-    const data = this.checkValidity();
+    const data = this.validateForm();
     
     const { email, password } = data;
     
