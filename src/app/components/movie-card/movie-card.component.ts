@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { IMovieData } from '../../interface/movies.interface';
+import { AppState, IMovieData } from '../../interface/movies.interface';
+import { Store } from '@ngrx/store';
+import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -12,5 +15,28 @@ export class MovieCardComponent {
 
   @Input () movie!:IMovieData;
   @Input () isTrending!:boolean;
+
+  constructor (
+    private store: Store<AppState>,
+    private authService: AuthService,
+    private router: Router,
+  ) {}
+
+  checkValidation () {
+    const validity = this.authService.isLoggedIn();
+    if (!validity) {
+      this.router.navigate(['/sign-up']);
+      return false;
+    }
+    return true;
+  };
+
+  handleBookmark () {
+    const valid = this.checkValidation();
+    if (!valid) return;
+    
+    // dispatches action
+    // this.store.dispatch()
+  };
 
 }

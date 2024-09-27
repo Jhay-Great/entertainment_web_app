@@ -64,5 +64,13 @@ export class AuthService {
       }))
   }
 
+  // checks if user is logged in
+  isLoggedIn () {
+    const token = this.localStorage.getItem('token');
+    if (!token) return false;
+    return true;
+
+  }
+
   // log out
 }
