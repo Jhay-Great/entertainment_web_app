@@ -46,6 +46,8 @@ picture {
         aspect-ratio: 3 / 2;
         width: 100%;
         object-fit: cover; 
+        border-radius: 10px;
+        
 
         // @include mix.breakpoint('large') {
         //     width: 250px;
@@ -82,7 +84,7 @@ article {
 .play-container {
     width: 100%;
     height: 100%;
-    background-color: func.addTransparency(var.$color-dark-blue, 30%);
+    background-color: func.addTransparency(var.$color-dark-blue, 40%);
     @include mix.flex(row, center, center);
     position: absolute;
     inset: 0;
