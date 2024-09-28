@@ -35,7 +35,6 @@ export const selectMovieItems = (category: string | null) => {
                 return movieCategory;
             } else if (category) {
                 const movieCategory = movieList.filter(movie => toLowerCase(movie.category) === category);
-                console.log(movieCategory);
                 return movieCategory;
             } else if (searchQuery) {
                 return search(movieList, 'title', searchQuery);
