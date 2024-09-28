@@ -24,14 +24,15 @@
     align-items: center;
     border-radius: 50%;
     z-index: 10;
+    transition: all 400ms ease-in-out;
 
     &:hover {
         background-color: var.$color-white;
-        transition: all 400ms ease-in;
+        transition: all 400ms ease-in-out;
         
         svg path {
             stroke: var.$color-dark-blue;;
-            transition: all 400ms ease-in;
+            transition: all 400ms ease-in-out;
         }
     }
 }

@@ -28,8 +28,9 @@
                 outline: none;
                 @include mix.font(var.$font-size-bodyM);
 
-                &:active, &:hover {
+                &:active, &:hover, &:focus {
                     outline: none;
+                    border-bottom: 1px solid var.$color-white;
                 }
                 
             }
