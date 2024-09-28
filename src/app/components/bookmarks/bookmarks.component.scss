@@ -4,10 +4,15 @@
 
 
 
-.movies {
-    @include mix.flex();
+.movies, .tv-series {
+    @include mix.flex(column);
     flex-wrap: wrap;
     justify-content: center;
+
+    .bookmarked-movies, .bookmarked-tv-series {
+        @include mix.flex();
+        flex-wrap: wrap;
+    }
 
     app-movie-card {
         @include mix.movie-card(150px);
