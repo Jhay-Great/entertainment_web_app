@@ -28,7 +28,7 @@
         <h2>Movies</h2>
         <section class="bookmarked-movies">
             @for(movie of (bookmarkedMovies | async); track $index) {
-                @if (movie.category === 'Movies') {
+                @if (movie.category === 'Movie') {
                     <app-movie-card 
                         [movie]="movie"
                      />
