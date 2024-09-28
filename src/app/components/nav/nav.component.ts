@@ -10,7 +10,7 @@ import { AppService } from '../../services/app-service/app.service';
   styleUrl: './nav.component.scss'
 })
 export class NavComponent implements OnInit {
-  @Output () display:EventEmitter<boolean> = new EventEmitter;
+  // @Output () display:EventEmitter<boolean> = new EventEmitter;
 
   constructor (
     private router: Router,

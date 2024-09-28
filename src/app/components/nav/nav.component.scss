@@ -12,8 +12,8 @@ nav {
         
     }
 
-    a {
-        svg path:hover {
+    a:hover {
+        svg path {
             fill: var.$color-red;
         }
     }
