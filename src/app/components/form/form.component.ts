@@ -64,8 +64,8 @@ export class FormComponent implements OnInit, OnDestroy {
       // sign up form
       this.form = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8), Validators.max(20)]],
-        confirmPassword: ['', [Validators.required, Validators.min(8), Validators.max(20)]]
+        password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]]
       }, {validators: passwordValidator()} ) //makes the validator accessible in the form group
 
     }

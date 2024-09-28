@@ -13,8 +13,7 @@
                         Email is required
                     </p>
 
-                }
-                @if (email?.invalid) {
+                } @else if (email?.invalid) {
                     <p class="error-message">
                         Invalid email address
                     </p>
@@ -24,19 +23,19 @@
         <div class="password">
             <input type="password" placeholder="Password" formControlName="password">
             @if (password?.dirty || password?.touched) {
-                @if (password?.errors?.['minLength']) {
+                @if (password?.errors?.['required']) {
+                    <p class="error-message">
+                        Password is required
+                    </p>
+                }
+                @else if (password?.errors?.['minlength']) {
                     <p class="error-message">
                         Password should not be less than 8 characters
                     </p>
                 }
-                @if (password?.errors?.['maxLength']) {
+                @else if (password?.errors?.['maxlength']) {
                     <p class="error-message">
                         Password should not be more than 20 characters
-                    </p>
-                }
-                @if (password?.errors?.['required']) {
-                    <p class="error-message">
-                        Password is required
                     </p>
                 }
             }
@@ -47,7 +46,7 @@
                 <input type="password" placeholder="Password" formControlName="confirmPassword">
                 @if (confirmPassword?.dirty || confirmPassword?.touched) {
 
-                    @if (confirmPassword?.errors?.['passwordMismatch']) {
+                    @if (form.errors?.['passwordMismatch']) {
                         <p class="error-message">
                             Invalid password, kindly confirm your password
                         </p>
