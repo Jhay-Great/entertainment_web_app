@@ -50,7 +50,7 @@ export class MovieEffect {
             ofType(bookmarkMovies),
             switchMap(() => 
                 this.store.pipe(
-                    select(selectBookmarked),
+                    select(selectAllMovies),
                     tap(data => this.localStorage.setItem('movies', data)),
                 )
             )

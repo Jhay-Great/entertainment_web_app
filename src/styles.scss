@@ -44,6 +44,7 @@ app-form {
     height: 100dvh;
     background-color: var.$color-dark-blue;
     padding-top: 5rem;
+    position: absolute;
     
     @include mix.breakpoint('large') {
         padding-top: 3rem;

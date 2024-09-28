@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AppService } from '../../services/app-service/app.service';
 
 @Component({
   selector: 'app-nav',
@@ -14,9 +15,14 @@ export class NavComponent implements OnInit {
   constructor (
     private router: Router,
     private cdf: ChangeDetectorRef,
+    private appService: AppService,
   ) {};
 
   ngOnInit(): void {
+    // this.appService.getForm().subscribe(
+    //   value => console.log('subscribed to an observable: ', value),
+    // )
+    // console.log('logging observable: ', this.appService.getForm());
     // this.handleFormDisplay();
   }
 
