@@ -4,32 +4,6 @@
     <div class="trending-movies-container">
         @for (movie of movies; track $index) {
             @if (movie.isTrending) {
-                <!-- <div class="trending-movies">
-                    <div class="bookmark-img">
-                        <img src="../../../assets/svgs/icon-bookmark-empty.svg" alt="empty bookmark svg">
-                    </div>
-                    <picture>
-                        <source 
-                            [srcset]="movie.thumbnail.trending.large"
-                            media="(min-width: 768px)"
-                         />
-                         <img [src]="  movie.thumbnail.trending.small " alt=" {{ movie.title}} ">
-                    </picture>
-                    <article class="info">
-                        <p class="year"> {{ movie.year }} </p>
-
-                        <div class="category-container">
-                            <img src="../../../assets/svgs/icon-category-movie.svg" alt="movie svg icon">
-                            <p class="category"> {{ movie.category}} </p>
-
-                        </div>
-
-                        <p class="pg"> {{ movie.rating }}</p>
-                        <p class="title">
-                            {{ movie.title }}
-                        </p>
-                    </article>
-                </div> -->
                 <app-movie-card  
                     [movie]="movie"
                 />
@@ -50,9 +24,7 @@
                 [movie]="movie"
                 [isTrending]="movie.isTrending"
             />
-            <!-- <p>
-                {{ movie.category }}
-            </p> -->
+            
         }
 
     </section>

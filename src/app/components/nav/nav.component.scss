@@ -12,6 +12,12 @@ nav {
         
     }
 
+    a {
+        svg path:hover {
+            fill: var.$color-red;
+        }
+    }
+
 }
 
 .avatar {

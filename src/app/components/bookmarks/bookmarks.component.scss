@@ -1,0 +1,26 @@
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/variables' as var;
+@use '../../../sass/function' as func;
+
+
+
+.movies {
+    @include mix.flex();
+    flex-wrap: wrap;
+    justify-content: center;
+
+    app-movie-card {
+        @include mix.movie-card(150px);
+        width: clamp(180px, 100%, 270px);
+
+        // @include mix.breakpoint('medium') {
+        //     // @include mix.movie-card();
+        // }
+
+        // @include mix.breakpoint('large') {
+        //     @include mix.movie-card(210px);
+        // }
+        // width: 120px;
+        // position: relative;
+    }
+}

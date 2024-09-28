@@ -21,7 +21,8 @@ app-root {
     @include mix.flex(column, _, _, 1);
 }
 
-app-movies {
+app-movies,
+app-bookmarks {
     // display: grid;
     // grid-template-columns: repeat(3, 1fr);
     // grid-auto-flow: auto;
