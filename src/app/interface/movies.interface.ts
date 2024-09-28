@@ -3,7 +3,6 @@ export interface AppState {
 }
 
 export interface IMoviesState {
-    // filterBy: ISearchMovie,
     searchQuery: string,
     loading: boolean;
     error: string;

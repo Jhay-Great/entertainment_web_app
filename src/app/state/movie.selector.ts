@@ -47,7 +47,6 @@ export const selectMovieItems = (category: string | null) => {
 // selects bookmarked movies
 export const selectBookmarked = createSelector(
     selectAllMovies,
-    selectFeature,
     (movies:IMovieData[]): IMovieData[] => {
         const movieData = movies.filter(movie => movie.isBookmarked)
         console.log('currently bookmarked movies: ', movieData)

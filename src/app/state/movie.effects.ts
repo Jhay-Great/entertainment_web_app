@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { MoviesService } from "../services/movies.service";
 import { bookmarkMovies, loadMovies, loadMoviesFailed, loadMoviesIsSuccessful } from "./movie.action";
-import { catchError, map, mergeMap, of, switchMap } from "rxjs";
-import { Store } from "@ngrx/store";
-import { selectAllMovies } from "./movie.selector";
+import { catchError, map, mergeMap, of, switchMap, tap } from "rxjs";
+import { select, Store } from "@ngrx/store";
+import { selectAllMovies, selectBookmarked } from "./movie.selector";
 import { v4 as uuid } from 'uuid';
 import { LocalStorageService } from "../services/localStorage/local-storage.service";
-import { IMovieData } from "../interface/movies.interface";
+import { AppState, IMovieData } from "../interface/movies.interface";
 
 @Injectable()
 export class MovieEffect {
@@ -19,23 +19,21 @@ export class MovieEffect {
                     map(data => {
                         const moviesInLocalStorage:IMovieData[] = this.localStorage.getItem('movies');
                         if (moviesInLocalStorage) {
-                            loadMoviesIsSuccessful({movies: moviesInLocalStorage});
+                            return loadMoviesIsSuccessful({movies: moviesInLocalStorage});
                         }
 
-                        return data.map(movie => {
+                        const movies =  data.map(movie => {
                             return {
                                 ...movie,
                                 id: uuid(),
                                 isBookmarked: false,
                             }
-                        })
+                        });
 
+                        this.localStorage.setItem('movies', movies);
+                        return loadMoviesIsSuccessful({movies})
                     }
                     ), 
-                    map(movies => (
-                        this.localStorage.setItem('movies', movies),
-                        loadMoviesIsSuccessful({movies})
-                    )),
                     catchError((error) => {
                         console.log(error);
                         return of(loadMoviesFailed({error}))
@@ -45,24 +43,26 @@ export class MovieEffect {
         )
     )
 
-    // updateMovieStatus$ = createEffect(() => 
-    //     this.action$.pipe(
-    //         ofType(bookmarkMovies),
-    //         switchMap(() => 
-    //             this.store.select(selectAllMovies).pipe(
-    //                 map(data => {
-    //                     return this.localStorage.setItem('movies', data);
-    //                 })
-    //                 // this.localStorage.setItem()
-    //             )
-    //         )
-    //     )
-    // )
+    
+
+    updateMovieStatus$ = createEffect(() => 
+        this.action$.pipe(
+            ofType(bookmarkMovies),
+            switchMap(() => 
+                this.store.pipe(
+                    select(selectBookmarked),
+                    tap(data => this.localStorage.setItem('movies', data)),
+                )
+            )
+        ),
+        { dispatch: false }
+    )
+    
 
     constructor (
         private action$: Actions,
         private moviesService: MoviesService,
-        private store: Store,
+        private store: Store<AppState>,
         private localStorage: LocalStorageService,
     ) {};
 }
