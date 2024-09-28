@@ -1,6 +1,9 @@
 import { createSelector } from "@ngrx/store";
 import { AppState, IMovieData } from "../interface/movies.interface";
 
+// local modules
+import { search, toLowerCase } from "../utils/functions";
+
 // selecting state feature
 export const selectFeature = (state:AppState) => state.movies;
 
@@ -23,11 +26,11 @@ export const selectMovieItems = (category: string | null) => {
             
             // returns the movie data based on the category and filter
             if (searchQuery !== '' && category) {
-                const data = movieList.filter(movie => toLowerCase(movie.title) === toLowerCase(searchQuery))
-                console.log('found data: ', data);
-                
+                // performs search
+                const data = search(movieList, 'title', searchQuery);
+
+                // filters based on the category
                 const movieCategory = data.filter(movie => toLowerCase(movie.category) === category);
-                console.log(movieCategory);
                 
                 return movieCategory;
             } else if (category) {
@@ -35,7 +38,7 @@ export const selectMovieItems = (category: string | null) => {
                 console.log(movieCategory);
                 return movieCategory;
             } else if (searchQuery) {
-                return movieList.filter(movie => toLowerCase(movie.title) === toLowerCase(searchQuery))
+                return search(movieList, 'title', searchQuery);
             } else {
                 return movieList;
             }
@@ -56,5 +59,16 @@ export const selectBookmarked = createSelector(
 )
 
 
-// return lowercase strings
-const toLowerCase = (string:string) => string.toLowerCase();
+// // return lowercase strings
+// const toLowerCase = (string:string) => string.toLowerCase();
+
+// // search functionality
+// const search = <T>(collection:T[], queryType: keyof T, word:string) => {
+//     return collection.filter(data => {
+//         const queryProperty = data[queryType];
+//         if (typeof queryProperty === 'string') {
+//             return toLowerCase(queryProperty).includes(toLowerCase(word))
+//         }
+//         return false;
+//     })
+// }
