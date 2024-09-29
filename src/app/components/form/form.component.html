@@ -70,7 +70,10 @@
 <!-- notification -->
 @if (isResponseActive) {
     <p>
-        {{ notification  }}
+        <!-- {{ notification  }} -->
+        <app-notification 
+            [notification]="notification"
+        />
     </p>
 }
 

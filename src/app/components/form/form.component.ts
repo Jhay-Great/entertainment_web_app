@@ -25,7 +25,8 @@ export class FormComponent implements OnInit, OnDestroy {
   isResponseActive:boolean = false;
   loading:boolean = false;
   // response!:Observable<string>
-  notification!:string;
+  // notification!:string;
+  notification!:{status:boolean, message:string};
   signUpSubscription = new Subscription;
   loginSubscription = new Subscription;
 
@@ -118,7 +119,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.loginSubscription = response.subscribe({
       next: value => {
         this.isResponseActive = true;
-        this.notification = 'login successful';
+        this.notification = {status: true, message: 'login successful'};
         console.log('logging response from server: ', value);
         this.localStorage.setItem('token', value.message);
         this.authService.setAuthentication(true);
@@ -127,7 +128,7 @@ export class FormComponent implements OnInit, OnDestroy {
       },
       error: err => {
         this.isResponseActive = true;
-        this.notification = err.message;
+        this.notification = {status: false, message: err.message};
         this.loading = false;
         console.log('logging err from server: ', err);
       },
@@ -159,7 +160,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.signUpSubscription = response.subscribe({
       next: response => {
         const { message } = response;
-        this.notification = message;
+        this.notification = {status: true, message};
         this.isResponseActive = true;
         this.loading = false; // removes spinner
         this.router.navigate(['/login']);
@@ -167,7 +168,7 @@ export class FormComponent implements OnInit, OnDestroy {
       },
       error: err => {
         this.isResponseActive = true;
-        this.notification = err.message;
+        this.notification = {status: false, message: err.message};
         this.loading = false;
         this.timeout(5000);
       },
