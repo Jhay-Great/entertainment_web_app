@@ -1,6 +1,7 @@
 @use '../../../sass/mixins' as mix;
 @use '../../../sass/variables' as var;
 @use '../../../sass/function' as func;
+@use '../../../sass/loading-spinner' as loading-spinner;
 
 .content {
     width: min(500px, 90%);
@@ -67,4 +68,18 @@
 .error-message {
     color: var.$color-red;
     font-size: var.$font-size-bodyS;
+}
+
+.spinner-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    inset: 0;
+    @include mix.flex(column, center, center);
+    background-color: func.addTransparency(var.$color-dark-blue, 20%);
+
+
+    .loader {
+        @include loading-spinner.spinner();
+    }
 }

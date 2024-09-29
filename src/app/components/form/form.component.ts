@@ -8,11 +8,12 @@ import { map, Observable, Subscription, tap } from 'rxjs';
 import { ISuccess } from '../../interface/auth.interface';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../../services/localStorage/local-storage.service';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule, NotificationComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
@@ -22,6 +23,7 @@ export class FormComponent implements OnInit, OnDestroy {
   // form = FormGroup;
   form!: FormGroup;
   isResponseActive:boolean = false;
+  loading:boolean = false;
   // response!:Observable<string>
   notification!:string;
   signUpSubscription = new Subscription;
@@ -103,6 +105,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   login () {
+    this.loading = true;
     const data = this.validateForm();
     console.log(data);
     if (!data) {
@@ -116,15 +119,17 @@ export class FormComponent implements OnInit, OnDestroy {
       next: value => {
         this.isResponseActive = true;
         this.notification = 'login successful';
-        console.log(value);
+        console.log('logging response from server: ', value);
         this.localStorage.setItem('token', value.message);
         this.authService.setAuthentication(true);
+        this.loading = false;
         this.router.navigate(['bookmarks']);
       },
       error: err => {
         this.isResponseActive = true;
         this.notification = err.message;
-        console.log(err);
+        this.loading = false;
+        console.log('logging err from server: ', err);
       },
       complete: () => {
         this.timeout(5000);
@@ -135,9 +140,14 @@ export class FormComponent implements OnInit, OnDestroy {
   };
   
   signup () {
+    this.loading = true;
+    console.log('display spinner: ', this.loading);
     const data = this.validateForm();
 
     if (!data) {
+      // removes spinner
+      this.loading = false;
+      console.log('hides spinner: ', this.loading);
       return;
     }
     
@@ -151,12 +161,14 @@ export class FormComponent implements OnInit, OnDestroy {
         const { message } = response;
         this.notification = message;
         this.isResponseActive = true;
+        this.loading = false; // removes spinner
         this.router.navigate(['/login']);
         return data;
       },
       error: err => {
         this.isResponseActive = true;
         this.notification = err.message;
+        this.loading = false;
         this.timeout(5000);
       },
       complete: () => {
