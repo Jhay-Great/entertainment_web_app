@@ -21,9 +21,9 @@
     }
 }
 
-.movie-list-container {
+// .movie-list-container {
 
-}
+// }
 
 .movies {
     @include mix.flex();
@@ -46,18 +46,10 @@
     }
 }
 
-.empty-search {
+.empty-search, app-not-found {
     width: 100%;
     height: 100%;
     @include mix.flex(column, center, center, 2);
 
-    svg {
-        width: 40%;
-        height: fit-content;
-    }
-
-    p {
-        @include mix.font(var.$font-size-m, 600, var.$color-red);
-        // color: var.$color-red;
-    }
+    
 }

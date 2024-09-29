@@ -8,11 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { ToggleVisibilityDirective } from '../../directives/toggle-visibility.directive';
 import { AppService } from '../../services/app-service/app.service';
+import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [CommonModule, MovieCardComponent, ToggleVisibilityDirective],
+  imports: [CommonModule, MovieCardComponent, NotFoundComponent, ToggleVisibilityDirective],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss'
 })
