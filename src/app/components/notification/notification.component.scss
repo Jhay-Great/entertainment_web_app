@@ -1,0 +1,20 @@
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/variables' as var;
+@use '../../../sass/function' as func;
+
+
+.toaster {
+    @include mix.flex();
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem;
+    
+    svg {
+        width: 100%;
+    }
+
+    small {
+        color: var.$color-white;
+    }
+
+}
