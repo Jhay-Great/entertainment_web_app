@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { debounceTime, fromEvent, map, mergeMap, Observable, Subscription, switchMap, tap } from 'rxjs';
 import { searchMovie } from '../../state/movie.action';
 import { ActivatedRoute } from '@angular/router';
+import { AppService } from '../../services/app-service/app.service';
 
 @Component({
   selector: 'app-search',
@@ -22,6 +23,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor (
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
+    private appService: AppService,
   ) {};
 
   ngOnInit(): void {
@@ -31,6 +33,13 @@ export class SearchComponent implements OnInit, OnDestroy {
       map((event:Event) => (event.target as HTMLInputElement).value),
       debounceTime(300),
       tap(data => {
+        if (data) {
+          // sets search state to true
+          this.appService.toggleSearch(true);
+        }else {
+          // sets search state to false
+          this.appService.toggleSearch(false);
+        }
         // console.log('input value: ', data)
       }),
       map(data => {

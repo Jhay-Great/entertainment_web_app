@@ -11,8 +11,13 @@ export class AppService {
 
   // behaviorSubject
   notificationSubject = new BehaviorSubject<string | null>(null);
+
   private formPageSubject = new BehaviorSubject<boolean>(false);
   isFormPageActive$ = this.formPageSubject.asObservable();
+
+  // search result
+  private searchSubject = new BehaviorSubject<boolean>(false);
+  private isSearchActive$ = this.searchSubject.asObservable();
 
   constructor() { }
 
@@ -33,6 +38,13 @@ export class AppService {
 
   handleFormPage (status:boolean) {
     this.formPageSubject.next(status);
+  }
+
+  toggleSearch (status:boolean): void {
+    this.searchSubject.next(status);
+  }
+  getSearchState () {
+    return this.isSearchActive$;
   }
 
   // timeout (seconds:number) {
