@@ -1,8 +1,11 @@
 
 @if ( (bookmarkedMovies | async)?.length === 0 ) {
-    <p>
+    <!-- <p>
         Bookmark is currently empty
-    </p>
+    </p> -->
+    <section class="empty">
+        <app-not-found [message]="'bookmark collection is empty'"/>
+    </section>
 }
 
 
