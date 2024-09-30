@@ -1,16 +1,18 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AppService } from '../../services/app-service/app.service';
+import { ToggleVisibilityDirective } from '../../directives/toggle-visibility.directive';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, ToggleVisibilityDirective],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss'
 })
 export class NavComponent implements OnInit {
   // @Output () display:EventEmitter<boolean> = new EventEmitter;
+  isActive:boolean = false;
 
   constructor (
     private router: Router,

@@ -28,6 +28,12 @@
 </nav>
 
 <!-- user logo -->
-<div class="avatar">
+<div class="avatar" >
     <img src="../../../assets/svgs/image-avatar.png" alt="avatar of the user">
+
+    <!-- logout menu -->
+    <section class="logout-container" [appToggleVisibility]="isActive">
+        <button class="logout">logout</button>
+        <button class="reset-logout">reset and logout</button>
+    </section>
 </div>
